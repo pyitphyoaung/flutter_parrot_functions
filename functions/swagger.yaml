@@ -1,0 +1,60 @@
+swagger: "2.0"
+info:
+  description: "Flutter Parrot API"
+  version: "1.0.0"
+  title: "Flutter Parrot"
+  termsOfService: "http://swagger.io/terms/"
+  contact:
+    email: "aung.developer@gmail.com"
+host: "us-central1-hack19-akl.cloudfunctions.net"
+basePath: "/v1"
+schemes:
+- "https"
+paths:
+  /getSearchKeywords:
+    post:
+      summary: "search keywords based on sentence passed"
+      description: ""
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "request"
+        required: true
+        schema:
+          $ref: "#/definitions/SearchKeywordsRequest"
+      responses:
+        200:
+          description: "Successfully accepted"
+          schema:
+            $ref: "#/definitions/SearchKeywordsResponse"
+        400:
+          description: "bad request"
+definitions:
+  SearchKeywordsRequest:
+    type: "object"
+    properties:
+      sentence:
+        type: "string"
+  SearchKeywordsResponse:
+    type: object
+    properties:
+      answers:
+        type: array
+        items:
+          required:
+          - keyword
+          - salience
+          - language
+          properties:
+            keyword:
+              type: string
+            salience:
+              type: integer
+            language:
+              type: string
+  GetInvitationResponse:
+    type: object
